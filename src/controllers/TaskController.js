@@ -59,3 +59,13 @@ export async function markTaskAsCompleted(request, response) {
         response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error in updating task'});
     }
 }
+
+export async function updateTask(request, response) {
+    try {
+        await Task.findByIdAndUpdate(request.params.id, request.body);
+        console.log(request.params.id, request.body);
+        response.status(StatusCodes.NO_CONTENT).json({message: 'Task updated successfully'});
+    } catch (error) {
+        response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error in updating task'});
+    }
+}
